@@ -1,0 +1,28 @@
+# Simple example of using Dakota to do a parameter study of a Python model that simply
+# solves the equation y = a x^1/2
+#
+# Call with:
+#   $ dakota -i dakota_analysis.in -o dakota_run.out &> run.log
+
+# There are num_steps + 1 = 7 evaluations.
+method
+  vector_parameter_study
+    final_point = 100, -4
+    num_steps = 10
+
+variables
+  continuous_design = 2
+    descriptors   ‘years_elapsed’, ‘Ts_hot’
+    initial_point  80, -6
+
+interface
+  fork
+    analysis_driver = ‘matlab ./DakotaHeatDiffusion1D.m’ # must be executable
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+
+responses
+  response_functions = 1
+  no_gradients
+  no_hessians
+

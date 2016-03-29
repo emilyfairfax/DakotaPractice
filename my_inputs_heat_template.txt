@@ -1,0 +1,5 @@
+{years_elapsed}
+{Ts_hot}
+
+# Note: the line "{coefficient}" will be replaced by an actual number
+
